@@ -9,11 +9,12 @@ import NoPage from './NoPage';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
+  <App/>
     <Routes>
       <Route>
-      <Route index element={<App />} />
-      <Route path="home" element={<App />} />
-      <Route path="*" element={<NoPage />} />
+      <Route index element={<App/>} />
+      <Route path="home" element={<App/>} />
+      <Route path="*" element={<NoPage/>} />
       </Route>
     </Routes>
   </BrowserRouter>
