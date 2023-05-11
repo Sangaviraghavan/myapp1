@@ -1,37 +1,25 @@
-import React from 'react';
-import { Routes, Route, BrowserRouter,Link } from "react-router-dom";
-
-//Screens Import
-import Home from './Home';
-import Search from './Search';
+import { useEffect, useState } from 'react';
+import './App.css';
 import MovieBox from './MovieBox';
+
+
+const API_URL = "https://api.themoviedb.org/3/movie/popular?api_key=bcc4ff10c2939665232d75d8bf0ec093";
+
 function App() {
+
+  const [movies , setMovies] = useState([]);
+  useEffect(() => {
+    fetch(API_URL)
+    .then((res)=>res.json())
+    .then(data=>{
+      console.log(data);
+      setMovies(data.results);
+    })
+  },[])
+
   return (
     <div className="App">
-      <div className="content">
-        <h1> Bot Flix</h1>
-          <div>
-          <input className='button' type='submit' value={'Search'}/>
-            
-        </div>
-
-        <BrowserRouter>
-        <Routes>
-            <Route path='/' element={<Home />}></Route>
-
-          
-          {/* <Route path='/movieBox' element={<MovieBox />}></Route>  */}
-          
-          
-
-
-          
-
-          
-          </Routes>
-        </BrowserRouter>
-      
-      </div>
+      {movies.map((movieReq)=><MovieBox key={movieReq.id} {...movieReq}/>)}
     </div>
   );
 }
